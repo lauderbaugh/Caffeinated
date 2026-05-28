@@ -6,13 +6,24 @@ struct SettingsView: View {
     @AppStorage("restoreOnLaunch") private var restoreOnLaunch = false
 
     var body: some View {
-        Form {
-            Toggle("Launch at login", isOn: $launchAtLogin)
-                .onChange(of: launchAtLogin) { _, newValue in
-                    applyLaunchAtLogin(newValue)
-                }
+        VStack(spacing: 16) {
+            Form {
+                Toggle("Launch at login", isOn: $launchAtLogin)
+                    .onChange(of: launchAtLogin) { _, newValue in
+                        applyLaunchAtLogin(newValue)
+                    }
 
-            Toggle("Restore previous state on launch", isOn: $restoreOnLaunch)
+                Toggle("Restore previous state on launch", isOn: $restoreOnLaunch)
+            }
+
+            Divider()
+
+            VStack(spacing: 4) {
+                Text("Built by Alex Lauderbaugh")
+                    .foregroundStyle(.secondary)
+                Link("View on GitHub", destination: URL(string: "https://github.com/lauderbaugh/Caffeinated")!)
+            }
+            .font(.footnote)
         }
         .padding(20)
         .frame(width: 360)
