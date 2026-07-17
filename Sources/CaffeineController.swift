@@ -36,6 +36,18 @@ final class CaffeineController: ObservableObject {
         persistState()
     }
 
+    /// Keep awake until the next occurrence of the given time of day.
+    /// If the chosen time has already passed today, it rolls over to tomorrow.
+    func activate(until timeOfDay: Date) {
+        let components = Calendar.current.dateComponents([.hour, .minute], from: timeOfDay)
+        guard let target = Calendar.current.nextDate(
+            after: Date(),
+            matching: components,
+            matchingPolicy: .nextTime
+        ) else { return }
+        activate(duration: target.timeIntervalSinceNow)
+    }
+
     func deactivate() {
         assertion.release()
         timer?.invalidate()

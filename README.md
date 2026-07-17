@@ -6,6 +6,7 @@ A small macOS menu bar app that keeps your Mac awake for a chosen duration. A sp
 
 - Live in the menu bar — no Dock icon, no window clutter
 - Keep awake for 15 min, 30 min, 1 hr, 2 hr, 5 hr, or indefinitely
+- Keep awake until a specific time of day (rolls over to tomorrow if the time has already passed)
 - Keeps both display and system awake (uses `PreventUserIdleDisplaySleep`)
 - Closing the lid still sleeps the Mac — by design
 - Optional launch at login (via `SMAppService`)
