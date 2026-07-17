@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MenuBarView: View {
     @EnvironmentObject var controller: CaffeineController
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         if controller.isActive {
@@ -18,6 +19,8 @@ struct MenuBarView: View {
             Button("5 hours")     { controller.activate(duration: 5 * 60 * 60) }
             Divider()
             Button("Indefinitely") { controller.activate(duration: nil) }
+            Divider()
+            Button("Until a specific time…") { openWindow(id: "until-picker") }
         }
 
         Divider()

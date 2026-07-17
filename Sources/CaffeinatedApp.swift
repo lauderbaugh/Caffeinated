@@ -17,5 +17,11 @@ struct CaffeinatedApp: App {
             SettingsView()
                 .environmentObject(controller)
         }
+
+        Window("Keep Awake Until", id: "until-picker") {
+            UntilPickerView()
+                .environmentObject(controller)
+        }
+        .windowResizability(.contentSize)
     }
 }
