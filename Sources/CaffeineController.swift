@@ -7,6 +7,7 @@ final class CaffeineController: ObservableObject {
     @Published private(set) var expirationDate: Date?
 
     private let assertion = PowerAssertion()
+    private let wiggler = CursorWiggler()
     private var timer: Timer?
 
     private let kWasActive = "wasActiveOnQuit"
@@ -20,6 +21,7 @@ final class CaffeineController: ObservableObject {
     func activate(duration: TimeInterval?) {
         guard assertion.acquire() else { return }
         isActive = true
+        wiggler.start()
         timer?.invalidate()
         timer = nil
 
@@ -50,6 +52,7 @@ final class CaffeineController: ObservableObject {
 
     func deactivate() {
         assertion.release()
+        wiggler.stop()
         timer?.invalidate()
         timer = nil
         isActive = false
